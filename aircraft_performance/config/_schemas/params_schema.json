@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Flight Analysis Parameters",
+  "type": "object",
+  "properties": {
+    "analysis_name": {"type": "string"},
+    "max_altitude_km": {"type": "number", "minimum": 0},
+    "mach_step": {"type": "number", "minimum": 0.0001},
+    "alt_step_km": {"type": "number", "minimum": 0.1},
+    "cl_permissible_factor": {"type": "number", "minimum": 0.5, "maximum": 0.95},
+    "output_options": {
+      "type": "object",
+      "properties": {
+        "save_csv": {"type": "boolean"},
+        "save_plots": {"type": "boolean"},
+        "plot_format": {"type": "string", "enum": ["png", "svg", "pdf"]}
+      }
+    },
+    "simulation_parameters": {
+      "type": "object",
+      "properties": {
+        "use_standard_atmosphere": {"type": "boolean"},
+        "interpolation_method": {"type": "string", "enum": ["linear", "quadratic", "cubic"]}
+      }
+    }
+  },
+  "required": ["max_altitude_km", "mach_step", "alt_step_km"]
+}

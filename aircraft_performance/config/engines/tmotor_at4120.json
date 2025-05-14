@@ -1,0 +1,6 @@
+{
+  "name": "Tmotor AT4120 Long Shaft",
+  "power_watts": 1000.0,
+  "mechanical_efficiency": 0.90,
+  "operating_rpm": 8000
+}

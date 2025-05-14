@@ -1,0 +1,31 @@
+{
+  "timestamp": "2025-05-13T19:43:44.681312",
+  "analysis_case": "performance_standard",
+  "aircraft": {
+    "name": "hztech",
+    "engine": "Rotax915",
+    "mass_kg": 665.0,
+    "wing_area_m2": 12.1
+  },
+  "calculation_parameters": {
+    "$schema": "../_schemas/params_schema.json",
+    "energy_method": "power",
+    "analysis_name": "performance_standard",
+    "max_altitude_km": 11.0,
+    "mach_step": 0.001,
+    "alt_step_km": 0.25,
+    "min_mach": 0.05,
+    "max_mach": 0.25,
+    "cl_permissible_factor": 0.8,
+    "output_options": {
+      "save_csv": true,
+      "save_plots": true,
+      "plot_format": "png"
+    },
+    "simulation_parameters": {
+      "use_standard_atmosphere": true,
+      "interpolation_method": "linear"
+    }
+  },
+  "output_location": "C:\\Users\\Rafael Trujillo\\Documents\\Python Scripts\\Performance\\aircraft_performance\\outputs\\hztech\\2025-05-13_03"
+}

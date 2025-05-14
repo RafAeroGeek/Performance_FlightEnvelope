@@ -1,0 +1,16 @@
+{
+  "name": "Rotax915",
+  "type_eng": "piston",
+  "max_power_watts": 77552.80,
+  "EFC": 33.92,
+  "operating_rpm": 5500,
+  "mechanical_efficiency": 0.85,
+  "power_altitude_factor": [
+    [0, 1.0],
+    [5, 0.8],
+    [11, 0.3]
+  ],
+  "propeller_name":"R_L68C",
+  "mach_numbers":[0.0,0.05,0.10,0.15,0.20,0.25,0.30,0.35,0.40,0.45,0.50],
+  "prop_efficiency":[0.0,0.50,0.74,0.82,0.86,0.87,0.85,0.80,0.70,0.63,0.60]
+}

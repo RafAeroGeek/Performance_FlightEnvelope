@@ -1,0 +1,31 @@
+{
+  "timestamp": "2025-05-11T11:00:23.083386",
+  "analysis_case": "performance_standard",
+  "aircraft": {
+    "name": "c525",
+    "engine": "FJ44TF",
+    "mass_kg": 4500.0,
+    "wing_area_m2": 22.0
+  },
+  "calculation_parameters": {
+    "$schema": "../_schemas/params_schema.json",
+    "energy_method": "force",
+    "analysis_name": "performance_standard",
+    "max_altitude_km": 11.0,
+    "mach_step": 0.01,
+    "alt_step_km": 0.5,
+    "min_mach": 0.05,
+    "max_mach": 0.8,
+    "cl_permissible_factor": 0.8,
+    "output_options": {
+      "save_csv": true,
+      "save_plots": true,
+      "plot_format": "png"
+    },
+    "simulation_parameters": {
+      "use_standard_atmosphere": true,
+      "interpolation_method": "linear"
+    }
+  },
+  "output_location": "C:\\Users\\Rafael Trujillo\\Documents\\Python Scripts\\Performance\\aircraft_performance\\outputs\\c525\\2025-05-11_01"
+}

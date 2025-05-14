@@ -1,0 +1,11 @@
+{
+  "name": "c525",
+  "mass_kg": 4500.00,
+  "wing_area_m2": 22.00,
+  "load_factor": 3.0,
+  "battery": {
+    "capacity_mAh": 2200,
+    "cells": 6,
+    "nominal_voltage": 4.2
+  }
+}
