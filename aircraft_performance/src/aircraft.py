@@ -1070,6 +1070,7 @@ class Aircraft:
     def plot_speed_envelope(self,
                            df_clmax: pd.DataFrame,
                            max_speeds: List[Tuple[float, float, float]],
+                           df_max_SEPower: pd.DataFrame = None,
                            save_path: Optional[str] = None,
                            show: bool = True,
                            **kwargs) -> plt.Figure:
@@ -1083,6 +1084,7 @@ class Aircraft:
         # 1. Procesar datos
         stall_alts = df_clmax['Altitude_km'].values
         stall_vel = df_clmax['V_min_ms'].values
+        
         max_alts = np.array([x[0] for x in max_speeds])
         max_vel = np.array([x[1] for x in max_speeds])
     
@@ -1115,14 +1117,25 @@ class Aircraft:
         ax.plot(stall_vel, stall_alts, 'r-', lw=2.5, label='Límite de stall (V_min)')
         ax.plot(max_vel_smooth, fine_alts, 'b-', lw=2.5, label='Límite aerodinámico (V_max)')
         
-        # 6. Puntos originales (opcional)
-        # if kwargs.get('show_original', True):
-        #     ax.scatter(max_vel, max_alts, c='gold', s=60, edgecolors='navy',
-        #               label='Datos originales', zorder=3)
+        #
+        # 6. NEW: Plot climb speed profile if provided
+        if df_max_SEPower is not None:
+            # Convert Mach to m/s using aircraft's true_speed method
+            climb_speeds = [
+                self._true_speed(row['Altitude_km'], row['Mach_at_max_SEPower'])
+                for _, row in df_max_SEPower.iterrows()
+            ]
+            
+            ax.plot(climb_speeds, df_max_SEPower['Altitude_km'],
+                   'm--', lw=2.5,  # Magenta dashed line
+                   label='Velocidad Optima ascenso',
+                   dash_capstyle='round',
+                   alpha=0.8)
+        #
     
         # 7. Configuración del gráfico
         ax.set(xlabel='Velocidad verdadera [m/s]', ylabel='Altitud [km]',
-               title=f'{self.aircraft_name} - Envolvente de Velocidades\n(Interpolación Akima)')
+               title=f'{self.aircraft_name} - Envolvente de Velocidades')
         ax.grid(True, ls='--', alpha=0.6)
         ax.legend(loc='upper center', bbox_to_anchor=(0.5, -0.12), ncol=3)
         

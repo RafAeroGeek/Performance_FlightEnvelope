@@ -24,6 +24,7 @@ def save_results(
     df_energy: pd.DataFrame,
     df_energy_av: pd.DataFrame,
     df_SEPower : pd.DataFrame,
+    df_max_speeds : pd.DataFrame,
     console: Console,
     analysis_case: Optional[str] = "standard"  # Nuevo parámetro para identificar el caso
 ) -> str:
@@ -59,6 +60,7 @@ def save_results(
     df_energy.to_csv(output_dir / "Energy_method.csv", index=False)
     df_energy_av.to_csv(output_dir / "Energy_av.csv", index=False)
     df_SEPower.to_csv(output_dir / "SpecificExcessPoT.csv", index=False)
+    df_max_speeds.to_csv(output_dir / "Max_speeds.csv", index=False)
     
     console.print(f"\n[bold green]✓ Resultados guardados en:[/] [cyan]{output_dir.resolve()}[/]")
     return str(output_dir)
@@ -176,7 +178,7 @@ def main():
                                      columns=['Altitude_km', 'Max_SEPower', 'Mach_at_max_SEPower'])
         
         max_speeds = aircraft.Max_True_Speed(df_SEPower)
-        df_max_SEPower = pd.DataFrame(max_speeds, 
+        df_max_speeds = pd.DataFrame(max_speeds, 
                                      columns=['Altitude_km', 'Max_True_speed', 'Mach_at_max_speed'])
         
         # Mostrar resultados
@@ -196,6 +198,7 @@ def main():
             df_energy = df_energy,
             df_energy_av = df_energy_av,
             df_SEPower=df_SEPower,
+            df_max_speeds = df_max_speeds,
             console=console,
             analysis_case=analysis_case  # Pasamos el caso
         )
@@ -276,12 +279,13 @@ def main():
         plot_path = str(Path(results_dir) / f"08_Flight_envelope_{aircraft.engine_name}.png")
         aircraft.plot_speed_envelope(df_clmax=df_clmax,
                                     max_speeds=max_speeds,
+                                    df_max_SEPower = df_max_SEPower,
                                     save_path=plot_path,
                                     fill_alpha=0.25,
                                     figsize=(12, 7),
                                     show=True,
                                     mooth_factor=150,
-                                    style='seaborn-whitegrid'
+                                    style='classic'
                                 )
         
         # aircraft.plot_speed_envelope(
